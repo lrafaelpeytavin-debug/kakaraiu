@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakaraiu - Univers et Épisodes</title>
+    <style>
+        :root {
+            --bg-abyssal: #050507; /* Noir suie / Abyssal */
+            --bg-metal: #12141A; /* Gris métal froid */
+            --text-ash: #D1D5DB; /* Gris cendre pour la lisibilité */
+            --accent-lantern: #E63946; /* Rouge braise / Lanterne */
+            --accent-lantern-glow: rgba(230, 57, 70, 0.6);
+            --accent-chi: #45A29E; /* Cyan sombre / Magie */
+            --glow-chi: #66FCF1; /* Éclat Chi pur */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-abyssal);
+            color: var(--text-ash);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Nav Glassmorphism */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 7, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFF;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: var(--accent-lantern);
+        }
+
+        nav a {
+            color: var(--text-ash);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--glow-chi);
+        }
+
+        /* Hero Section with Parallax illusion */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* Placeholder gradient to simulate the dark atmospheric image */
+            background: linear-gradient(to bottom, rgba(5,5,7,0.3), var(--bg-abyssal)), radial-gradient(circle at center, rgba(230, 57, 70, 0.15) 0%, transparent 60%);
+            border-bottom: 1px solid #1a1a24;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: #FFF;
+            letter-spacing: 10px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--accent-lantern-glow);
+            font-family: 'Georgia', serif; /* A bit of classic contrast */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: #9CA3AF;
+        }
+
+        .btn-glow {
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--accent-lantern);
+            color: var(--accent-lantern);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.2) inset;
+        }
+
+        .btn-glow:hover {
+            background: var(--accent-lantern);
+            color: #FFF;
+            box-shadow: 0 0 25px var(--accent-lantern-glow);
+        }
+
+        /* Episodes Section */
+        .episodes {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #FFF;
+            margin-bottom: 50px;
+            border-left: 4px solid var(--accent-chi);
+            padding-left: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-metal);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--glow-chi);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 252, 241, 0.3);
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: #FFF;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            color: #9CA3AF;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--accent-chi);
+            text-transform: uppercase;
+        }
+
+        /* Universe / Codex Section */
+        .codex {
+            padding: 100px 50px;
+            background-color: var(--bg-metal);
+        }
+        
+        .codex-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .codex-text h2 {
+            font-size: 2.5rem;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+        
+        .codex-text p {
+            margin-bottom: 20px;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #0B0C10;
+            border: 1px solid #2A2D34;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4A4D54;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #1a1a24;
+            font-size: 0.8rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Kaka<span>raiu</span></div>
+        <nav>
+            <a href="#hero">Accueil</a>
+            <a href="#episodes">Épisodes</a>
+            <a href="#codex">Le Codex</a>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <h1>KAKARAIU</h1>
+        <p>Les ruelles de Tyrih sentent la fumée et le métal humide. Au-dessus, les lanternes célestes cachent les ombres d'une ville prête à basculer.</p>
+        <a href="#episodes" class="btn-glow">Plonger dans Tyrih</a>
+    </section>
+
+    <section id="episodes" class="episodes">
+        <h2 class="section-title">Chapitre I — Les lanternes de Tyrih</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Épisode 1 : Les Enfants de Tyrih</h3>
+                <p>La misère ambiante contraste avec la lueur du Nouvel An. Raiu, enfant des rues, vole de toit en toit jusqu'à sa rencontre avec Seran.</p>
+                <div class="card-footer">
+                    <span>Temps de lecture : 4 min</span>
+                    <span>Lire →</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Épisode 2 : Le Vol du Dragon</h3>
+                <p>L'infiltration du manoir. Une manipulation instable du chi, l'extraction de la broche, et un décollage brutal sous les assauts de la centurie.</p>
+                <div class="card-footer">
+                    <span>Temps de lecture : 6 min</span>
+                    <span>Lire →</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Épisode 3 : La Chute</h3>
+                <p>L'apparition de la silhouette lumineuse dans la nuit. La chute vertigineuse de Raiu et une phrase énigmatique murmurée dans le vide.</p>
+                <div class="card-footer">
+                    <span>Temps de lecture : 5 min</span>
+                    <span>Lire →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="codex" class="codex">
+        <div class="codex-container">
+            <div class="codex-text">
+                <h2>Exploration du Lore</h2>
+                <p>Découvrez la structure de la Guilde, les mystères entourant les cristaux de vie et l'art de maîtriser le chi.</p>
+                <p>Cet espace hub centralise l'encyclopédie visuelle et textuelle de l'univers de Kakaraiu. Une immersion totale entre l'architecture oppressante des bas-fonds et les palais suspendus.</p>
+                <a href="#" style="color: var(--glow-chi); text-decoration: none; margin-top: 20px; display: inline-block;">Accéder au Codex complet →</a>
+            </div>
+            <div class="image-placeholder">
+                [ Emplacement pour Artwork d'ambiance (ex: Ruelle générée par IA) ]
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Univers Kakaraiu. Propulsé par la vision KLE.
+    </footer>
+
+</body>
+</html>
